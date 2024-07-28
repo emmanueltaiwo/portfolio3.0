@@ -66,7 +66,7 @@ const HeroSection = () => {
       />
 
       <div className="z-10 flex flex-col gap-5">
-      <h3 className="text-[15px] md:text-[20px] lg:text-[20px] xl:text-[40px] text-gray-400 font-[300] tracking-[0.4em]">
+        <h3 className="text-[15px] md:text-[20px] lg:text-[20px] xl:text-[40px] text-gray-400 font-[300] tracking-[0.4em]">
           SOFTWARE ENGINEER
         </h3>
         <h1 className="hidden lg:inline text-[60px] xl:text-[100px] font-[800] text-white leading-[80px] xl:leading-[100px]">
@@ -126,11 +126,11 @@ const HeroSection = () => {
       </div>
 
       <Image
-        src="/assets/images/emmanuel.jpg"
+        src="/assets/images/hero.jpg"
         alt="emmanuel"
         width={500}
         height={500}
-        className="w-full lg:w-[500px] ring-2 rounded-full z-10 select-none"
+        className="w-full lg:w-[510px] lg:h-[500px] shadow-2xl shadow-[#b21eb2] hidden lg:inline ring-2 rounded-full z-10 select-none"
         draggable="false"
       />
 
