@@ -4,6 +4,8 @@ import Image from "next/image";
 import emailjs from "emailjs-com";
 import { Loader2 } from "lucide-react";
 import { useFormStatus } from "react-dom";
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
 
 const SubmitButton = () => {
   const { pending } = useFormStatus();
@@ -20,6 +22,9 @@ const SubmitButton = () => {
 };
 
 const ContactSection = () => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
+
   const handleSubmit = async (formData: FormData) => {
     try {
       const fullName = formData.get("full_name") as string;
@@ -48,9 +53,13 @@ const ContactSection = () => {
   };
 
   return (
-    <section
+    <motion.section
+      ref={ref}
       id="contact"
       className="h-screen flex flex-col gap-5 justify-center items-center relative pb-[20vh] pt-[20vh]"
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : 50 }}
+      transition={{ duration: 0.5 }}
     >
       <Image
         src="/assets/images/30.png"
@@ -76,7 +85,6 @@ const ContactSection = () => {
         className="w-[500px] absolute left-0 top-[550px] rounded-full z-10 select-none"
         draggable="false"
       />
-
       <Image
         src="/assets/images/21.png"
         alt="1"
@@ -85,7 +93,6 @@ const ContactSection = () => {
         className="absolute w-[1000px] left-0 top-[-100px] z-[0px] select-none"
         draggable="false"
       />
-
       <Image
         src="/assets/images/20.png"
         alt="1"
@@ -95,13 +102,21 @@ const ContactSection = () => {
         draggable="false"
       />
 
-      <h1 className="w-full text-[50px] lg:text-[200px] font-[800] text-white leading-[110px] z-20 text-center">
+      <motion.h1
+        className="w-full text-[50px] lg:text-[200px] font-[800] text-white leading-[110px] z-20 text-center"
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : 50 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
+      >
         Contact me
-      </h1>
+      </motion.h1>
 
-      <form
+      <motion.form
         action={handleSubmit}
         className="w-[95%] mx-auto lg:w-[800px] z-10 rounded-xl p-5 lg:p-10 border-[0.5px] border-[#b21eb2d5] lg:mt-10 flex flex-col gap-5"
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : 50 }}
+        transition={{ duration: 0.5, delay: 0.4 }}
       >
         <div className="flex flex-col gap-2">
           <label
@@ -151,8 +166,8 @@ const ContactSection = () => {
         </div>
 
         <SubmitButton />
-      </form>
-    </section>
+      </motion.form>
+    </motion.section>
   );
 };
 

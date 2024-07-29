@@ -1,3 +1,5 @@
+"use client";
+
 import {
   GitHubLogoIcon,
   InstagramLogoIcon,
@@ -7,10 +9,21 @@ import {
 } from "@radix-ui/react-icons";
 import Link from "next/link";
 import Image from "next/image";
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
 
 const HeroSection = () => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
+
   return (
-    <div className="flex flex-col lg:flex-row gap-5 lg:justify-center p-5 md:p-10 lg:items-start lg:pt-20 h-full lg:h-[90vh] pb-[20vh]">
+    <motion.div
+      ref={ref}
+      className="flex flex-col lg:flex-row gap-5 lg:justify-center p-5 md:p-10 lg:items-start lg:pt-20 h-full lg:h-[90vh] pb-[20vh]"
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : 50 }}
+      transition={{ duration: 0.5 }}
+    >
       <Image
         src="/assets/images/19.png"
         alt="1"
@@ -164,7 +177,7 @@ const HeroSection = () => {
           <InstagramLogoIcon className="w-7 h-7" />
         </a>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

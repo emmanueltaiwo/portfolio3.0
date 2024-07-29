@@ -1,4 +1,8 @@
+"use client";
+
 import Image from "next/image";
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
 
 type Skill = {
   name: string;
@@ -37,11 +41,17 @@ const chunkArray = (array: Skill[], chunkSize: number): Skill[][] => {
 
 const Skills = () => {
   const skillChunks = chunkArray(SKILLS, Math.ceil(SKILLS.length / 4));
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
 
   return (
-    <section
+    <motion.section
+      ref={ref}
       id="skills"
       className="h-full flex flex-col gap-5 justify-center lg:items-center relative md:pb-[20vh]"
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : 50 }}
+      transition={{ duration: 0.5 }}
     >
       <Image
         src="/assets/images/20.png"
@@ -51,7 +61,6 @@ const Skills = () => {
         className="absolute right-0 top-0 z-[0px] select-none"
         draggable="false"
       />
-
       <Image
         src="/assets/images/20.png"
         alt="1"
@@ -69,7 +78,12 @@ const Skills = () => {
         draggable="false"
       />
 
-      <div className="z-10 flex flex-col lg:flex-row gap-5 items-center justify-center h-fit">
+      <motion.div
+        className="z-10 flex flex-col lg:flex-row gap-5 items-center justify-center h-fit"
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : 50 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
+      >
         <h1 className="w-full text-[60px] lg:text-[120px] font-[800] text-white leading-[110px] z-20 text-center lg:text-left">
           My Skills
         </h1>
@@ -81,13 +95,22 @@ const Skills = () => {
           className="hidden lg:flex w-[500px] z-10 select-none"
           draggable="false"
         />
-      </div>
+      </motion.div>
 
-      <div
+      <motion.div
         className={`hidden lg:grid grid-cols-4 z-10 gap-5 lg:justify-items-center lg:w-[70%] lg:mx-auto mt-10`}
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : 50 }}
+        transition={{ duration: 0.5, delay: 0.3 }}
       >
         {skillChunks.map((chunk, index) => (
-          <ul key={index} className="flex flex-col gap-5 list-disc px-5">
+          <motion.ul
+            key={index}
+            className="flex flex-col gap-5 list-disc px-5"
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : 50 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+          >
             {chunk.map((skill, i) => (
               <li
                 key={i}
@@ -96,15 +119,24 @@ const Skills = () => {
                 {skill.name}
               </li>
             ))}
-          </ul>
+          </motion.ul>
         ))}
-      </div>
+      </motion.div>
 
-      <div
-        className={`flex flex-col md:px-10 px-5 justify-start items-start lg:hidden z-10 gap-5] mt-10`}
+      <motion.div
+        className={`flex flex-col md:px-10 px-5 justify-start items-start lg:hidden z-10 gap-5 mt-10`}
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : 50 }}
+        transition={{ duration: 0.5, delay: 0.3 }}
       >
         {skillChunks.map((chunk, index) => (
-          <ul key={index} className="flex flex-col gap-5 list-disc px-5">
+          <motion.ul
+            key={index}
+            className="flex flex-col gap-5 list-disc px-5"
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : 50 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+          >
             {chunk.map((skill, i) => (
               <li
                 key={i}
@@ -113,9 +145,9 @@ const Skills = () => {
                 {skill.name}
               </li>
             ))}
-          </ul>
+          </motion.ul>
         ))}
-      </div>
+      </motion.div>
 
       <Image
         src="/assets/images/22.png"
@@ -125,7 +157,6 @@ const Skills = () => {
         className="absolute hidden lg:flex right-0 mt-[400px] w-[200px] rounded-full z-10 select-none"
         draggable="false"
       />
-
       <Image
         src="/assets/images/22.png"
         alt="emmanuel"
@@ -134,7 +165,7 @@ const Skills = () => {
         className="absolute hidden lg:flex left-0 w-[200px] rounded-full z-10 select-none"
         draggable="false"
       />
-    </section>
+    </motion.section>
   );
 };
 

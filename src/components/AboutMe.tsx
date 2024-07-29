@@ -2,12 +2,21 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
 
 const AboutMe = () => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
+
   return (
-    <section
+    <motion.section
+      ref={ref}
       id="about"
       className="h-full pb-[10vh] lg:h-screen max-h-full flex flex-col lg:flex-row gap-5 justify-center items-center relative"
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : 50 }}
+      transition={{ duration: 0.5 }}
     >
       <Image
         src="/assets/images/20.png"
@@ -30,14 +39,22 @@ const AboutMe = () => {
         <h1 className="absolute top-[-50px] right-0 text-[120px] font-[800] text-white leading-[110px] z-20">
           About <br /> <span className="text-in-image">Me</span>
         </h1>
-        <Image
-          src="/assets/images/17.png"
-          alt="emmanuel"
-          width={900}
-          height={600}
-          className="rounded-full z-10 select-none"
-          draggable="false"
-        />
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : 50 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="z-10"
+        >
+          <Image
+            src="/assets/images/17.png"
+            alt="emmanuel"
+            width={900}
+            height={600}
+            className="rounded-full z-10 select-none"
+            draggable="false"
+          />
+        </motion.div>
+
         <Image
           src="/assets/images/6.png"
           alt="emmanuel"
@@ -71,14 +88,20 @@ const AboutMe = () => {
           draggable="false"
         />
 
-        <p className="text-[17px] text-gray-300 font-[400] w-[90%] mx-auto lg:w-full lg:mx-0 text-center lg:text-left">
-          Highly skilled and results-driven Software Engineer withmultiple years
-          of experience and a proven track record in developing robust and
+        <motion.p
+          className="text-[17px] text-gray-300 font-[400] w-[90%] mx-auto lg:w-full lg:mx-0 text-center lg:text-left"
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : 50 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
+          Highly skilled and results-driven Software Engineer with multiple
+          years of experience and a proven track record in developing robust and
           scalable software solutions. Specialized expertise in JavaScript,
-          Typescript,Node.js, React.js, ReactNative, Express.js, andNoSQL
-          databases. Delivering innovative solutionsthat drive operational
+          Typescript, Node.js, React.js, ReactNative, Express.js, and NoSQL
+          databases. Delivering innovative solutions that drive operational
           efficiency and enhance user experiences.
-        </p>
+        </motion.p>
+
         <Link
           href="/#contact"
           className="text-white font-[700] text-[15px] w-fit h-fit px-10 py-4 rounded-lg bg-[#b21eb2] hover:bg-[#b21eb2d5] mt-5 flex items-center gap-3 mx-auto lg:mx-0"
@@ -95,7 +118,7 @@ const AboutMe = () => {
           draggable="false"
         />
       </div>
-    </section>
+    </motion.section>
   );
 };
 

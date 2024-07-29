@@ -2,9 +2,9 @@
 
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { HamburgerMenuIcon, Cross1Icon } from "@radix-ui/react-icons";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useInView } from "framer-motion";
 
 export const NAV_LINKS = [
   {
@@ -31,14 +31,21 @@ export const NAV_LINKS = [
 
 const Header = () => {
   const pathname = usePathname();
-
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
-
   const isActiveLink = (link: string) => link === pathname;
+
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
 
   return (
     <div className="p-5 flex justify-center z-[4000] max-w-screen-2xl">
-      <header className="fixed max-w-screen-2xl w-[95%] md:w-[90%] h-20 bg-black z-[4000] rounded-full border-[0.5px] border-[#734def] flex justify-between items-center px-5 md:px-10 overflow-auto">
+      <motion.header
+        ref={ref}
+        className="fixed max-w-screen-2xl w-[95%] md:w-[90%] h-20 bg-black z-[4000] rounded-full border-[0.5px] border-[#734def] flex justify-between items-center px-5 md:px-10 overflow-auto"
+        initial={{ opacity: 0, y: -50 }}
+        animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : -50 }}
+        transition={{ duration: 0.5 }}
+      >
         <div className="flex items-center gap-20">
           <Link href="/" className="text-white font-[600] text-[25px]">
             Emmanuel
@@ -87,7 +94,7 @@ const Header = () => {
             </button>
           )}
         </div>
-      </header>
+      </motion.header>
 
       {isMenuOpen && (
         <div
