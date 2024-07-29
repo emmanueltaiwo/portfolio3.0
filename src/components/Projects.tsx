@@ -34,6 +34,14 @@ const projectsData: Project[] = [
     liveUrl: "https://clutchapp.vercel.app/",
     githubUrl: "https://github.com/emmanueltaiwo/clutch",
   },
+  {
+    name: "TokenTide",
+    description:
+      "This is a Modern Web3 App Landing Page Built using Next.js, Typescript, and Tailwind CSS",
+    imageUrl: "/assets/images/tokentide.png",
+    liveUrl: "https://tokentideapp.vercel.app/",
+    githubUrl: "https://github.com/emmanueltaiwo/tokentide-landing-page",
+  },
 ];
 
 const Projects = () => {
@@ -102,7 +110,7 @@ const Projects = () => {
       <div className="w-[70%] z-10 hidden xl:flex flex-col gap-[150px] justify-around mt-[100px]">
         {projectsData.map((project, index) => (
           <div
-            key={index}
+            key={index + 10}
             className={`flex ${
               index % 2 === 0 ? "gap-5" : "justify-end ml-auto gap-5"
             } z-10 relative w-[900px] h-[400px]`}
@@ -157,7 +165,7 @@ const Projects = () => {
 
       <div className="z-10 xl:hidden flex flex-col gap-10 justify-around">
         {projectsData.map((project, index) => (
-          <div key={index} className={`flex`}>
+          <div key={index + 10} className={`flex`}>
             <div className="rounded-xl w-[95%] mx-auto bg-slate-800/50 p-5 relative overflow-hidden flex flex-col gap-5">
               <Image
                 src={project.imageUrl}
