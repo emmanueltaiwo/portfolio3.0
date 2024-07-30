@@ -148,6 +148,7 @@ const Projects = () => {
 
               <div className="flex items-center gap-5">
                 <a
+                  target="_blank"
                   href={project.liveUrl}
                   className="text-white font-[700] text-[15px] w-fit h-fit px-10 py-3 rounded-lg bg-[#b21eb2] hover:bg-[#b21eb2d5] mt-5 flex items-center gap-3 transition-all duration-300"
                 >
@@ -156,6 +157,7 @@ const Projects = () => {
                 </a>
 
                 <a
+                  target="_blank"
                   href={project.githubUrl}
                   className="text-white font-[700] text-[15px] w-fit h-fit px-10 py-3 rounded-lg border-2 border-[#b21eb2] hover:bg-[#b21eb2d5] mt-5 flex items-center gap-3 transition-all duration-300"
                 >
